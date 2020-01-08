@@ -11,7 +11,6 @@ typedef struct auditoria
     char data;
     int duracao;
     int quantidadeVuln;
-
 } Auditoria;
 
 typedef struct vulnerabilidade
