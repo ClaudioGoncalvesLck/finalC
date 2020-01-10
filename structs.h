@@ -8,6 +8,11 @@ typedef struct colaborador
     char nome;
 } Colaborador;
 
+struct listaColaboradores
+{
+    Colaborador col[10];
+};
+
 typedef struct auditoria
 {
     int id;
@@ -23,3 +28,7 @@ typedef struct vulnerabilidade
     char desc;
     char nivel;
 } Vulnerabilidade;
+
+void dadosColaborador(Colaborador *lista);
+void registarCol(Colaborador *lista, int tam);
+void listarCol(Colaborador *lista);

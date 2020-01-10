@@ -16,16 +16,77 @@ void mainmenu()
 
     printf("**********************************\n");
 };
-void adicionarCol(){
-
+void adicionarCol()
+{
+    Colaborador lista;
+    dadosColaborador(&lista);
+    registarCol(&lista, 2);
+}
+void dadosColaborador(Colaborador *lista)
+{
+    system("cls");
+    printf("ID: ");
+    scanf("%d", &lista->id);
+    printf("Nome: ");
+    scanf("%s", &lista->nome);
 };
+void registarCol(Colaborador *lista, int tam)
+{
+    FILE *file = fopen("colaboradores.bin", "wb+");
+    int contador = 0;
+
+    for (int i = 0; i < tam; i++)
+    {
+        contador++;
+        fwrite(&lista[i], sizeof(Colaborador), 1, file);
+    }
+
+    fclose(file);
+    printf("write %d items", contador);
+};
+
+void listarCol(Colaborador *lista)
+{
+    FILE *file = fopen("colaboradores.bin", "rb");
+    Colaborador val;
+    int contador = 0;
+    while (fread(&val, sizeof(Colaborador), 1, file) > 0)
+    {
+        lista[contador] = val;
+        printf("ID: %d", &lista[contador].id);
+        printf("Nome: %s", &lista[contador].nome);
+        contador++;
+    }
+    fclose(file);
+    printf("read %d items ok\n", contador);
+    getchar();
+};
+
 void editarCol(){
 
 };
 void removerCol(){
 
 };
-void menuCol()
+void adicionarVuln(){
+
+};
+void editarVuln(){
+
+};
+void removerVuln(){
+
+};
+void adicionarAud(){
+
+};
+void editarAud(){
+
+};
+void removerAud(){
+
+};
+void menuCol(Colaborador *lista)
 {
     int opcao;
     do
@@ -39,14 +100,19 @@ void menuCol()
 
         printf("2- Editar\n");
 
-        printf("3- Remover\n\n");
+        printf("3- Remover\n");
+
+        printf("4 - Listar\n\n");
+
+        printf("0 - Voltar ao Menu\n\n");
 
         printf("**********************************\n");
 
-        scanf("%d", opcao);
+        scanf("%d", &opcao);
         switch (opcao)
         {
         case 0:
+            return;
             break;
         case 1:
             adicionarCol();
@@ -56,6 +122,9 @@ void menuCol()
             break;
         case 3:
             removerCol();
+            break;
+        case 4:
+            listarCol(lista);
             break;
         }
     } while (opcao != 0);
@@ -77,12 +146,25 @@ void menuVuln()
 
         printf("3- Remover\n\n");
 
+        printf("0 - Voltar ao Menu\n\n");
+
         printf("**********************************\n");
 
-        scanf("%d", opcao);
-        if (opcao = 0)
+        scanf("%d", &opcao);
+        switch (opcao)
         {
-            mainmenu();
+        case 0:
+            return;
+            break;
+        case 1:
+            adicionarVuln();
+            break;
+        case 2:
+            editarVuln();
+            break;
+        case 3:
+            removerVuln();
+            break;
         }
     } while (opcao != 0);
 };
@@ -103,12 +185,25 @@ void menuAuditorias()
 
         printf("3- Remover\n\n");
 
+        printf("0 - Voltar ao Menu\n\n");
+
         printf("**********************************\n");
 
-        scanf("%d", opcao);
-        if (opcao = 0)
+        scanf("%d", &opcao);
+        switch (opcao)
         {
-            mainmenu();
+        case 0:
+            return;
+            break;
+        case 1:
+            adicionarAud();
+            break;
+        case 2:
+            editarAud();
+            break;
+        case 3:
+            removerAud();
+            break;
         }
     } while (opcao != 0);
 };
